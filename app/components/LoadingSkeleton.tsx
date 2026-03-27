@@ -1,10 +1,10 @@
 export function LoadingSkeleton() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-      <div className="bg-white rounded-lg shadow-xl p-8 max-w-6xl w-full">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-zinc-100 to-zinc-200 p-4 dark:from-zinc-950 dark:to-zinc-900">
+      <div className="w-full max-w-6xl rounded-lg bg-white p-8 shadow-xl dark:bg-zinc-900">
         <div className="animate-pulse">
           {/* Header skeleton */}
-          <div className="h-10 bg-gray-200 rounded w-64 mx-auto mb-8"></div>
+          <div className="mx-auto mb-8 h-10 w-64 rounded bg-zinc-200 dark:bg-zinc-700"></div>
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Board skeleton */}
@@ -13,29 +13,29 @@ export function LoadingSkeleton() {
                 {[...Array(25)].map((_, i) => (
                   <div
                     key={i}
-                    className="aspect-square bg-gray-200 rounded-lg"
+                    className="aspect-square rounded-lg bg-zinc-200 dark:bg-zinc-700"
                   ></div>
                 ))}
               </div>
-              <div className="h-10 bg-gray-200 rounded w-full mb-4"></div>
+              <div className="mb-4 h-10 w-full rounded bg-zinc-200 dark:bg-zinc-700"></div>
             </div>
             
             {/* Sidebar skeleton */}
             <div className="space-y-6">
-              <div className="bg-gray-50 rounded-lg p-4">
-                <div className="h-6 bg-gray-200 rounded w-32 mb-4"></div>
+              <div className="rounded-lg bg-zinc-50 p-4 dark:bg-zinc-800">
+                <div className="mb-4 h-6 w-32 rounded bg-zinc-200 dark:bg-zinc-700"></div>
                 <div className="space-y-3">
-                  <div className="h-4 bg-gray-200 rounded"></div>
-                  <div className="h-4 bg-gray-200 rounded"></div>
-                  <div className="h-4 bg-gray-200 rounded"></div>
+                  <div className="h-4 rounded bg-zinc-200 dark:bg-zinc-700"></div>
+                  <div className="h-4 rounded bg-zinc-200 dark:bg-zinc-700"></div>
+                  <div className="h-4 rounded bg-zinc-200 dark:bg-zinc-700"></div>
                 </div>
               </div>
               
-              <div className="bg-gray-50 rounded-lg p-4">
-                <div className="h-6 bg-gray-200 rounded w-32 mb-4"></div>
+              <div className="rounded-lg bg-zinc-50 p-4 dark:bg-zinc-800">
+                <div className="mb-4 h-6 w-32 rounded bg-zinc-200 dark:bg-zinc-700"></div>
                 <div className="space-y-2">
                   {[...Array(5)].map((_, i) => (
-                    <div key={i} className="h-8 bg-gray-200 rounded"></div>
+                    <div key={i} className="h-8 rounded bg-zinc-200 dark:bg-zinc-700"></div>
                   ))}
                 </div>
               </div>
@@ -43,7 +43,7 @@ export function LoadingSkeleton() {
           </div>
         </div>
         
-        <p className="text-center text-gray-500 mt-6 animate-pulse">
+        <p className="mt-6 animate-pulse text-center text-zinc-500 dark:text-zinc-400">
           Loading game assets...
         </p>
       </div>
@@ -60,7 +60,7 @@ export function LoadingSpinner({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
 
   return (
     <div
-      className={`${sizeClasses[size]} border-indigo-600 border-t-transparent rounded-full animate-spin`}
+      className={`${sizeClasses[size]} border-zinc-600 dark:border-zinc-400 border-t-transparent rounded-full animate-spin`}
     ></div>
   );
 }

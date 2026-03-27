@@ -285,13 +285,13 @@ export default function GameBoard() {
 
   if (loadError && !isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[400px] gap-6 p-8">
+      <div className="flex min-h-[400px] flex-col items-center justify-center gap-6 p-8">
         <div className="text-red-500 text-6xl">⚠️</div>
-        <h2 className="text-2xl font-semibold text-gray-800">Failed to Load Game</h2>
-        <p className="text-gray-600 text-center max-w-md">{loadError}</p>
+        <h2 className="text-2xl font-semibold text-zinc-800 dark:text-zinc-100">Failed to Load Game</h2>
+        <p className="max-w-md text-center text-zinc-600 dark:text-zinc-400">{loadError}</p>
         <button
           onClick={handleRetry}
-          className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors font-medium"
+          className="rounded-lg bg-zinc-900 px-6 py-3 font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
         >
           Retry Loading
         </button>
@@ -301,12 +301,7 @@ export default function GameBoard() {
 
   return (
     <div className="flex flex-col items-center w-full gap-10">
-      <div className="flex flex-wrap items-center justify-center gap-3 text-xs tracking-widest text-zinc-500 uppercase">
-        <span>Status</span>
-        <span className="border border-zinc-200 px-2 py-1 text-zinc-700 bg-zinc-50">
-          {isLoading ? 'Loading assets...' : 'Ready'}
-        </span>
-
+      <div className="flex flex-wrap items-center justify-center gap-3 text-xs tracking-widest text-zinc-500 uppercase dark:text-zinc-400">
         <span>Difficulty</span>
         <div className="flex gap-2">
           {(['easy', 'medium', 'hard'] as const).map((level) => (
@@ -315,8 +310,8 @@ export default function GameBoard() {
               onClick={() => setDifficulty(level)}
               disabled={isLoading}
               className={`px-3 py-1 border transition-colors ${difficulty === level
-                ? 'border-zinc-900 bg-zinc-900 text-white'
-                : 'border-zinc-200 hover:border-zinc-400 text-zinc-500 disabled:opacity-30'
+                ? 'border-zinc-900 bg-zinc-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900'
+                : 'border-zinc-200 text-zinc-500 hover:border-zinc-400 disabled:opacity-30 dark:border-zinc-700 dark:text-zinc-400 dark:hover:border-zinc-500'
                 }`}
             >
               {level}
@@ -327,7 +322,7 @@ export default function GameBoard() {
         <button
           onClick={handleNewRound}
           disabled={isLoading || !dictionary}
-          className="px-3 py-1 border border-zinc-200 hover:border-zinc-400 text-zinc-600 disabled:opacity-30 transition-colors"
+          className="border border-zinc-200 px-3 py-1 text-zinc-600 transition-colors hover:border-zinc-400 disabled:opacity-30 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-zinc-500"
         >
           New Round
         </button>
@@ -335,33 +330,34 @@ export default function GameBoard() {
 
       <div className="flex flex-col md:flex-row gap-16 w-full justify-center items-start">
         <div className="flex-1 max-w-xs flex flex-col gap-4">
-          <div className="flex justify-between items-end border-b border-zinc-200 pb-2">
+          <div className="flex items-end justify-between border-b border-zinc-200 pb-2 dark:border-zinc-800">
             <h2 className="text-sm font-medium tracking-wide uppercase flex items-center gap-2">
-              Player {turn === 'player' && !isLoading && <span className="w-1.5 h-1.5 bg-zinc-900 rounded-full animate-pulse" />}
+              Player {turn === 'player' && !isLoading && <span className="h-1.5 w-1.5 rounded-full bg-zinc-900 animate-pulse dark:bg-zinc-100" />}
             </h2>
             <span className="text-xl font-light">{userScore}</span>
           </div>
           <div className="min-h-[100px] flex flex-wrap gap-2 content-start">
-            {userWords.length === 0 && <span className="text-zinc-400 text-sm">No words yet</span>}
+            {userWords.length === 0 && <span className="text-sm text-zinc-400 dark:text-zinc-500">No words yet</span>}
             {userWords.map((word) => (
-              <span key={word} className="px-2 py-1 bg-zinc-100 text-xs border border-zinc-200 text-zinc-700">
-                {word} <span className="text-zinc-400 ml-1">{calculateScore(word)}</span>
+              <span key={word} className="border border-zinc-200 bg-zinc-100 px-2 py-1 text-xs text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
+                {word} <span className="ml-1 text-zinc-400 dark:text-zinc-500">{calculateScore(word)}</span>
               </span>
             ))}
           </div>
         </div>
 
         <div className="flex flex-col items-center gap-8">
-          <div className="grid grid-cols-5 gap-1.5 bg-zinc-100 p-2 border border-zinc-200">
+          <div className="grid grid-cols-5 gap-1.5 border border-zinc-200 bg-zinc-100 p-2 dark:border-zinc-800 dark:bg-zinc-900">
             {board.flat().map((letter, i) => (
               <div
                 key={i}
                 onClick={() => turn === 'player' && !isLoading && !isRoundOver && setCurrentWord((prev) => prev + letter.toLowerCase())}
                 className={`
                   w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center
-                  bg-white border border-zinc-200 text-2xl font-light text-zinc-800
+                  border border-zinc-200 bg-white text-2xl font-light text-zinc-800
                   transition-all duration-150
-                  ${turn === 'player' && !isLoading && !isRoundOver ? 'cursor-pointer hover:bg-zinc-50 hover:border-zinc-400 active:bg-zinc-100' : 'cursor-default opacity-80'}
+                  dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-100
+                  ${turn === 'player' && !isLoading && !isRoundOver ? 'cursor-pointer hover:border-zinc-400 hover:bg-zinc-50 active:bg-zinc-100 dark:hover:border-zinc-500 dark:hover:bg-zinc-900 dark:active:bg-zinc-800' : 'cursor-default opacity-80'}
                 `}
               >
                 {letter}
@@ -377,20 +373,20 @@ export default function GameBoard() {
                 onChange={(e) => setCurrentWord(e.target.value)}
                 disabled={turn !== 'player' || isLoading || isRoundOver}
                 placeholder={isRoundOver ? 'Round complete' : turn === 'player' ? 'Type word...' : 'AI turn...'}
-                className="flex-1 px-4 py-2 bg-transparent border-b border-zinc-300 focus:border-zinc-900 focus:outline-none disabled:opacity-50 text-center text-lg font-light uppercase tracking-wider placeholder:normal-case placeholder:tracking-normal placeholder:text-zinc-400 transition-colors"
+                className="flex-1 border-b border-zinc-300 bg-transparent px-4 py-2 text-center text-lg font-light uppercase tracking-wider transition-colors placeholder:normal-case placeholder:tracking-normal placeholder:text-zinc-400 focus:border-zinc-900 focus:outline-none disabled:opacity-50 dark:border-zinc-700 dark:placeholder:text-zinc-500 dark:focus:border-zinc-100"
                 autoComplete="off"
                 autoCapitalize="off"
               />
               <button
                 type="submit"
                 disabled={turn !== 'player' || !currentWord || isLoading || isRoundOver}
-                className="px-6 py-2 bg-zinc-900 hover:bg-zinc-800 disabled:bg-zinc-200 disabled:text-zinc-400 text-white transition-colors text-sm uppercase tracking-wider"
+                className="bg-zinc-900 px-6 py-2 text-sm uppercase tracking-wider text-white transition-colors hover:bg-zinc-800 disabled:bg-zinc-200 disabled:text-zinc-400 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300 dark:disabled:bg-zinc-700 dark:disabled:text-zinc-500"
               >
                 Play
               </button>
             </form>
             <div className="h-4 text-center mt-2">
-              <span className={`text-xs tracking-wide transition-opacity ${winner ? 'text-zinc-900 font-medium' : 'text-zinc-500'
+              <span className={`text-xs tracking-wide transition-opacity ${winner ? 'font-medium text-zinc-900 dark:text-zinc-100' : 'text-zinc-500 dark:text-zinc-400'
                 }`}>
                 {message || `Playable words: ${allBoardWords.length} | Remaining: ${availableWords.length} | First to ${WIN_SCORE} wins`}
               </span>
@@ -399,17 +395,17 @@ export default function GameBoard() {
         </div>
 
         <div className="flex-1 max-w-xs flex flex-col gap-4">
-          <div className="flex justify-between items-end border-b border-zinc-200 pb-2">
+          <div className="flex items-end justify-between border-b border-zinc-200 pb-2 dark:border-zinc-800">
             <h2 className="text-sm font-medium tracking-wide uppercase flex items-center gap-2">
-              AI {turn === 'ai' && !isLoading && <span className="w-1.5 h-1.5 bg-zinc-900 rounded-full animate-pulse" />}
+              AI {turn === 'ai' && !isLoading && <span className="h-1.5 w-1.5 rounded-full bg-zinc-900 animate-pulse dark:bg-zinc-100" />}
             </h2>
             <span className="text-xl font-light">{aiScore}</span>
           </div>
           <div className="min-h-[100px] flex flex-wrap gap-2 content-start">
-            {aiWords.length === 0 && <span className="text-zinc-400 text-sm">No words yet</span>}
+            {aiWords.length === 0 && <span className="text-sm text-zinc-400 dark:text-zinc-500">No words yet</span>}
             {aiWords.map((word) => (
-              <span key={word} className="px-2 py-1 bg-zinc-100 text-xs border border-zinc-200 text-zinc-700">
-                {word} <span className="text-zinc-400 ml-1">{calculateScore(word)}</span>
+              <span key={word} className="border border-zinc-200 bg-zinc-100 px-2 py-1 text-xs text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
+                {word} <span className="ml-1 text-zinc-400 dark:text-zinc-500">{calculateScore(word)}</span>
               </span>
             ))}
           </div>

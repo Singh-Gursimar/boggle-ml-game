@@ -39,28 +39,28 @@ export class ErrorBoundary extends React.Component<
       }
 
       return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-          <div className="bg-white rounded-lg shadow-xl p-8 max-w-md w-full">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-zinc-100 to-zinc-200 p-4 dark:from-zinc-950 dark:to-zinc-900">
+          <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-xl dark:bg-zinc-900">
             <div className="text-red-500 text-6xl mb-4 text-center">⚠️</div>
-            <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">
+            <h1 className="mb-4 text-center text-2xl font-bold text-zinc-800 dark:text-zinc-100">
               Oops! Something went wrong
             </h1>
-            <p className="text-gray-600 mb-6 text-center">
+            <p className="mb-6 text-center text-zinc-600 dark:text-zinc-400">
               The game encountered an unexpected error. Please try refreshing the page.
             </p>
             {this.state.error && (
               <details className="mb-6 text-sm">
-                <summary className="cursor-pointer text-gray-500 hover:text-gray-700">
+                <summary className="cursor-pointer text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200">
                   Technical details
                 </summary>
-                <pre className="mt-2 p-3 bg-gray-100 rounded text-xs overflow-auto">
+                <pre className="mt-2 overflow-auto rounded bg-zinc-100 p-3 text-xs dark:bg-zinc-800 dark:text-zinc-300">
                   {this.state.error.toString()}
                 </pre>
               </details>
             )}
             <button
               onClick={() => window.location.reload()}
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+              className="w-full rounded-lg bg-zinc-900 px-6 py-3 font-semibold text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
             >
               Refresh Page
             </button>
